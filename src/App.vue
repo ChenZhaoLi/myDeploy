@@ -1,17 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img alt="Vue logo" src="./assets/logo.png" />
+    <!-- http://192.168.2.33:3001/Users -->
+    {{ test }}
+    <!-- <ul>
+      <li v-for="user in users" :key="user.id">{{ user.name }}</li>
+    </ul>-->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      users: [],
+      test: ''
+    }
+  },
+  mounted() {
+    // fetch('http://192.168.2.33:3001/Users')
+    //   .then(response => response.json())
+    //   .then(data => this.users = data);
+    fetch('http://192.168.2.33:8000/api/json')
+      .then(response => response.json())
+      .then(data => this.test = data);
   }
 }
 </script>
